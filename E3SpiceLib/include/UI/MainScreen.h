@@ -8,8 +8,13 @@ namespace E3Spice
     public:
         MainScreen();
         ~MainScreen();
-        void Initialize() override;
-        void Run() override;
+        bool Initialize() override;
+
+    protected:
+        virtual void HandleEvent(SDL_Event &event);
+        virtual void Render();
+
+    friend class E3SpiceUI;
     
     };
 } // namespace E3Spice

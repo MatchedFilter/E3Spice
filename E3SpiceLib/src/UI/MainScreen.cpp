@@ -2,20 +2,28 @@
 
 using namespace E3Spice;
 
-MainScreen::MainScreen()
+MainScreen::MainScreen() : 
+    Screen ( "E3Spice" )
 {
 }
 
 MainScreen::~MainScreen()
 {
+    SDL_Quit();
 }
 
-void MainScreen::Initialize()
+bool MainScreen::Initialize()
 {
-    Screen::Initialize();
+    return Screen::Initialize();
 }
 
-void MainScreen::Run()
+
+void MainScreen::HandleEvent(SDL_Event &event)
 {
-    Screen::Run();
+    Screen::HandleEvent(event);
+}
+
+void MainScreen::Render()
+{
+    Screen::Render();
 }
