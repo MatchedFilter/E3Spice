@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.16)
+project (E3WidgetsLib)
+
+
+INCLUDE(FindPkgConfig)
+PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
+PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
+PKG_SEARCH_MODULE(SDL2TTF REQUIRED SDL2_ttf>=2.0.0)
+
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL2TTF_INCLUDE_DIRS})
+
+file(GLOB_RECURSE E3WIDGETS_LIB_SRCS src/*.cpp)
+file(GLOB_RECURSE E3WIDGETS_LIB_SRC_HDRS src/*.h)
+file(GLOB_RECURSE E3WIDGETS_LIB_HDRS include/*.h)
+
+add_library(${PROJECT_NAME}
+    ${E3WIDGETS_LIB_SRCS}
+    ${E3WIDGETS_LIB_SRC_HDRS}
+    ${E3WIDGETS_LIB_HDRS}
+)
+
+target_include_directories(${PROJECT_NAME} PUBLIC include)
+target_include_directories(${PROJECT_NAME} PRIVATE src)
+
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2TTF_LIBRARIES})
