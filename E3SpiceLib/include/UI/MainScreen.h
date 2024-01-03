@@ -1,6 +1,7 @@
 #ifndef _E3SPICE_MAINSCREEN_H_
 #define _E3SPICE_MAINSCREEN_H_
-#include "Screen/Screen.h"
+#include "Widget/Screen.h"
+#include "E3Tk.h"
 namespace E3Spice
 {
     class MainScreen : public E3Widgets::Screen
@@ -8,11 +9,11 @@ namespace E3Spice
     public:
         MainScreen();
         ~MainScreen();
-        bool Initialize() override;
+        bool Initialize(E3Widgets::E3Tk *root) override;
 
     protected:
-        virtual void HandleEvent(SDL_Event &event);
-        virtual void Render();
+        virtual void HandleEvent(SDL_Event &event) override;
+        virtual void Render() override;
 
     friend class E3SpiceUI;
     

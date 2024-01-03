@@ -2,15 +2,19 @@
 #define _E3WIDGETS_SCREEN_H_
 #include <string>
 #include "E3Constants.h"
+#include "Widget/PlacableWidget.h"
+#include <unordered_map>
 #include "SDL2/SDL.h"
 namespace E3Widgets
 {
-    class Screen
+    class E3Tk;
+    class Screen : public PlacableWidget
     {
     public:
         Screen(std::string title = "E3");
         ~Screen();
-        virtual bool Initialize();
+        virtual bool Initialize(E3Tk *root);
+        virtual SDL_Renderer *GetSDLRenderer() override {return m_Renderer;}
 
     public:
         void SetTitle(const char *title) { m_Title = title; }
@@ -24,21 +28,26 @@ namespace E3Widgets
 
         bool GetIsAlive() const { return m_IsAlive; }
         void Destroy() { m_IsAlive = false; }
-        
-        void Run();
+
+        bool IsMainScreen() const {return m_IsMainScreen; }
 
     protected:
         virtual void HandleEvent(SDL_Event &event);
         virtual void Render();
 
     protected:
+        E3Tk *m_Root;
         bool m_IsAlive;
         std::string m_Title;
         Size m_Size;
         Color m_Bg;
         SDL_Window *m_Window;
         SDL_Renderer *m_Renderer;
-        uint32_t m_ID;
+        uint32_t m_ScreenID;
+        bool m_IsMainScreen;
+        std::unordered_map<WidgetID, Widget*> m_WidgetMap;
+
+    friend class E3Tk;
     };
 } // namespace E3Widgets
 

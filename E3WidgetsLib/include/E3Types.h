@@ -3,6 +3,20 @@
 #include <cinttypes>
 namespace E3Widgets
 {
+
+    typedef int64_t WidgetID;
+    const WidgetID INVALID_WIDGET_ID = -1;
+
+    struct Position
+    {
+        int32_t x;
+        int32_t y;
+        Position(int32_t x = 0, int32_t y = 0) : x { x }, y { y } { }
+        Position operator+(const Position &other) { return Position(other.x + x, other.y + y);}
+        Position(const Position &other) : x { other.x }, y { other.y } { }
+        ~Position() { }
+    };
+
     struct Size
     {
         int32_t width;
@@ -23,6 +37,15 @@ namespace E3Widgets
         Color (const Color& other) : r { other.r },
             g { other.g }, b { other.b }, a { other.a } { }
         ~Color() { }
+    };
+
+    struct Area
+    {
+        Position position;
+        Size size;
+        Area(Position position, Size size) : position { position }, size { size } { }
+        Area(const Area & other) : position { other.position }, size { other.size } { }
+        ~Area() { }
     };
 
 

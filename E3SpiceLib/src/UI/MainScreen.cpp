@@ -5,6 +5,7 @@ using namespace E3Spice;
 MainScreen::MainScreen() : 
     Screen ( "E3Spice" )
 {
+    m_IsMainScreen = true;
 }
 
 MainScreen::~MainScreen()
@@ -12,9 +13,9 @@ MainScreen::~MainScreen()
     SDL_Quit();
 }
 
-bool MainScreen::Initialize()
+bool MainScreen::Initialize(E3Widgets::E3Tk *root)
 {
-    return Screen::Initialize();
+    return Screen::Initialize(root);
 }
 
 
